@@ -1,4 +1,4 @@
-import profile from "../../img/photo-1622548331053-105252394.jpeg";
+import profile from "../../../img/photo-1622548331053-105252394.jpeg";
 
 function Navbar(props) {
 	return (
@@ -9,6 +9,7 @@ function Navbar(props) {
 						className="mr-2 flex h-[48px] w-[48px] cursor-pointer items-center justify-center rounded-full hover:bg-slate-200"
 						onClick={() => {
 							props.setIsShowSidebar(!props.isShowSidebar);
+							props.setIsShowCreate(false);
 						}}
 					>
 						<i className="fa-solid fa-bars text-slate-500" />
