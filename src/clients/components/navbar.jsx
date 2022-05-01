@@ -1,11 +1,16 @@
 import profile from "../../img/photo-1622548331053-105252394.jpeg";
 
-function Navbar() {
+function Navbar(props) {
 	return (
 		<nav className="h-[4rem] w-full border-b-[1px] border-slate-200">
 			<div className="flex h-full items-center justify-between p-2">
 				<div className="flex w-[350px] justify-start">
-					<div className="mr-2 flex h-[48px] w-[48px] items-center justify-center rounded-full hover:bg-slate-200">
+					<div
+						className="mr-2 flex h-[48px] w-[48px] cursor-pointer items-center justify-center rounded-full hover:bg-slate-200"
+						onClick={() => {
+							props.setIsShowSidebar(!props.isShowSidebar);
+						}}
+					>
 						<i className="fa-solid fa-bars text-slate-500" />
 					</div>
 					<h1 className="flex items-center text-2xl">Calendar</h1>
