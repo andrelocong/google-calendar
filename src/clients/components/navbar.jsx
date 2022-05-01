@@ -2,65 +2,65 @@ import profile from "../../img/photo-1622548331053-105252394.jpeg";
 
 function Navbar() {
 	return (
-		<nav className="w-full h-[4rem] border-b-[1px] border-slate-200">
-			<div className="p-2 h-full flex items-center justify-between">
-				<div className="flex justify-start w-[350px]">
-					<div className="w-[48px] h-[48px] rounded-full hover:bg-slate-200 flex items-center justify-center mr-2">
+		<nav className="h-[4rem] w-full border-b-[1px] border-slate-200">
+			<div className="flex h-full items-center justify-between p-2">
+				<div className="flex w-[350px] justify-start">
+					<div className="mr-2 flex h-[48px] w-[48px] items-center justify-center rounded-full hover:bg-slate-200">
 						<i className="fa-solid fa-bars text-slate-500" />
 					</div>
-					<h1 className="text-2xl flex items-center">Calendar</h1>
+					<h1 className="flex items-center text-2xl">Calendar</h1>
 				</div>
 
-				<div className="w-full flex justify-between">
+				<div className="flex w-full justify-between">
 					<div className="flex">
-						<div className="h-full flex items-center mr-5">
-							<div className="w-[68px] h-[40px] mr-8 cursor-pointer flex justify-center items-center rounded-md border-[1px] text-sm hover:bg-slate-200">
+						<div className="mr-5 flex h-full items-center">
+							<div className="mr-8 flex h-[40px] w-[68px] cursor-pointer items-center justify-center rounded-md border-[1px] text-sm hover:bg-slate-200">
 								Today
 							</div>
 
-							<div className="w-[30px] h-[30px] rounded-full flex justify-center items-center hover:bg-slate-200 mr-1 cursor-pointer">
+							<div className="mr-1 flex h-[30px] w-[30px] cursor-pointer items-center justify-center rounded-full hover:bg-slate-200">
 								<i className="fa-solid fa-angle-left text-slate-500" />
 							</div>
 
-							<div className="w-[30px] h-[30px] rounded-full flex justify-center items-center hover:bg-slate-200 cursor-pointer">
+							<div className="flex h-[30px] w-[30px] cursor-pointer items-center justify-center rounded-full hover:bg-slate-200">
 								<i className="fa-solid fa-angle-right text-slate-500" />
 							</div>
 						</div>
 
-						<div className="h-full flex items-center">
+						<div className="flex h-full items-center">
 							<h1 className="text-2xl text-slate-700">May 1, 2022</h1>
 						</div>
 					</div>
 
 					<div className="flex">
 						<div className="flex h-full items-center">
-							<div className="w-[40px] h-[40px] rounded-full hover:bg-slate-200 flex justify-center items-center mr-2">
+							<div className="mr-2 flex h-[40px] w-[40px] items-center justify-center rounded-full hover:bg-slate-200">
 								<i className="fa-solid fa-magnifying-glass text-slate-500" />
 							</div>
 
-							<div className="w-[40px] h-[40px] rounded-full hover:bg-slate-200 flex justify-center items-center mr-2">
-								<i className="fa-regular fa-circle-question text-slate-500 text-xl" />
+							<div className="mr-2 flex h-[40px] w-[40px] items-center justify-center rounded-full hover:bg-slate-200">
+								<i className="fa-regular fa-circle-question text-xl text-slate-500" />
 							</div>
 
-							<div className="w-[40px] h-[40px] rounded-full hover:bg-slate-200 flex justify-center items-center mr-2">
-								<i className="fa-solid fa-gear text-slate-500 text-lg" />
+							<div className="mr-2 flex h-[40px] w-[40px] items-center justify-center rounded-full hover:bg-slate-200">
+								<i className="fa-solid fa-gear text-lg text-slate-500" />
 							</div>
 						</div>
 
-						<div className="w-[68px] h-[40px] cursor-pointer flex justify-center items-center rounded-md border-[1px] text-sm hover:bg-slate-200">
+						<div className="flex h-[40px] w-[68px] cursor-pointer items-center justify-center rounded-md border-[1px] text-sm hover:bg-slate-200">
 							Day
 						</div>
 					</div>
 				</div>
 
-				<div className="flex justify-end w-[200px] h-full items-center">
-					<div className="w-[45px] h-[45px] flex justify-center items-center hover:bg-slate-200 rounded-full mr-2">
+				<div className="flex h-full w-[200px] items-center justify-end">
+					<div className="mr-2 flex h-[45px] w-[45px] items-center justify-center rounded-full hover:bg-slate-200">
 						<i className="fa-solid fa-bars text-slate-500" />
 					</div>
 
-					<div className="w-[45px] h-[45px] mr-3 rounded-full hover:bg-slate-200 flex justify-center items-center">
+					<div className="mr-3 flex h-[45px] w-[45px] items-center justify-center rounded-full hover:bg-slate-200">
 						<img
-							className="object-cover object-center w-[35px] h-[35px] rounded-full"
+							className="h-[35px] w-[35px] rounded-full object-cover object-center"
 							src={profile}
 							alt="profile"
 						/>
