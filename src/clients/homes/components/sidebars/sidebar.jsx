@@ -1,4 +1,4 @@
-import CalendarSidebar from "./calendar/calendar.sidebar";
+import CalendarSidebar from "./calendar-sidebar/calendar-sidebar";
 
 function Sidebar(props) {
 	return (

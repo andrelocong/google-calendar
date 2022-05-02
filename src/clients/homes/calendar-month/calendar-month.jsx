@@ -1,12 +1,13 @@
 import { useEffect, useState } from "react";
-import { useCalendarHook } from "./calendar.hook";
+import { useCalendarMonthHook } from "./calendar-month.hook";
 
 function CalendarHome(props) {
 	const [calendar, setCalendar] = useState([]);
 
-	const dayName = props.value._locale._weekdaysShort;
-
-	const { date, dayStylesHome } = useCalendarHook(props.value, props.setValue);
+	const { date, dayStylesHome, dayName } = useCalendarMonthHook(
+		props.value,
+		props.setValue
+	);
 
 	useEffect(() => {
 		setCalendar(date);

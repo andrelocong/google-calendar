@@ -1,8 +1,6 @@
-export const useCalendarHook = (value, setValue) => {
+export const useCalendarSidebarHook = (value, setValue) => {
 	const startDay = value.clone().startOf("month").startOf("week");
 	const endDay = value.clone().endOf("month").endOf("week");
-
-	const daysName = ["S", "M", "T", "W", "T", "F", "S"];
 
 	const day = startDay.clone().subtract(1, "day");
 	const date = [];
@@ -15,10 +13,11 @@ export const useCalendarHook = (value, setValue) => {
 		);
 	}
 
+	const daysName = ["S", "M", "T", "W", "T", "F", "S"];
 	const monthName = value.format("MMMM");
 	const year = value.format("YYYY");
 
-	const handlePrev = async () => {
+	const handlePrev = () => {
 		setValue(value.clone().subtract(1, "month"));
 	};
 
@@ -38,16 +37,6 @@ export const useCalendarHook = (value, setValue) => {
 			: "text-black hover:bg-slate-200";
 	};
 
-	const dayStylesHome = (day) => {
-		return day.isSame(new Date(), "day")
-			? "bg-sky-600 text-white"
-			: "hover:bg-slate-200" && day.isBefore(value, "month")
-			? "text-slate-300 hover:bg-slate-200"
-			: "text-black hover:bg-slate-200" && day.isAfter(value, "month")
-			? "text-slate-300 hover:bg-slate-200"
-			: "text-black hover:bg-slate-200";
-	};
-
 	return {
 		date,
 		daysName,
@@ -56,6 +45,5 @@ export const useCalendarHook = (value, setValue) => {
 		handleNext,
 		handlePrev,
 		dayStylesSidebar,
-		dayStylesHome,
 	};
 };

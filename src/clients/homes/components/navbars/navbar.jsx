@@ -1,11 +1,9 @@
-import profile from "../../../img/photo-1622548331053-105252394.jpeg";
-import { useCalendarHook } from "./calendar/calendar.hook";
+import profile from "../../../../img/photo-1622548331053-105252394.jpeg";
+import { useNavbarHook } from "./navbar.hook";
 
 function Navbar(props) {
-	const { handleNext, handlePrev, monthName, year } = useCalendarHook(
-		props.value,
-		props.setValue
-	);
+	const { handleNext, handlePrev, handleToday, monthName, year } =
+		useNavbarHook(props.value, props.setValue, props.setSidebarValue);
 
 	return (
 		<nav className="h-[4rem] w-full border-b-[1px] border-slate-200">
@@ -26,7 +24,12 @@ function Navbar(props) {
 				<div className="flex w-full justify-between">
 					<div className="flex">
 						<div className="mr-5 flex h-full items-center">
-							<div className="mr-8 flex h-[40px] w-[68px] cursor-pointer items-center justify-center rounded-md border-[1px] text-sm hover:bg-slate-200">
+							<div
+								className="mr-8 flex h-[40px] w-[68px] cursor-pointer items-center justify-center rounded-md border-[1px] text-sm hover:bg-slate-200"
+								onClick={() => {
+									handleToday();
+								}}
+							>
 								Today
 							</div>
 

@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { useCalendarHook } from "./calendar.hook";
+import { useCalendarSidebarHook } from "./calendar-sidebar.hook";
 
 function CalendarSidebar(props) {
 	const [calendar, setCalendar] = useState([]);
@@ -12,7 +12,7 @@ function CalendarSidebar(props) {
 		handleNext,
 		handlePrev,
 		dayStylesSidebar,
-	} = useCalendarHook(props.value, props.setValue);
+	} = useCalendarSidebarHook(props.value, props.setValue);
 
 	useEffect(() => {
 		setCalendar(date);
