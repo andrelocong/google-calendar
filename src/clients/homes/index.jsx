@@ -1,8 +1,11 @@
 import React, { useState } from "react";
 import Navbar from "./components/navbar";
 import Sidebar from "./components/sidebar";
+import CalendarHome from "./components/calendar/calendar.home";
+import moment from "moment";
 
 function Home() {
+	const [value, setValue] = useState(moment());
 	const [isShowSidebar, setIsShowSidebar] = useState(true);
 	const [isShowCreate, setIsShowCreate] = useState(false);
 
@@ -12,6 +15,8 @@ function Home() {
 				isShowSidebar={isShowSidebar}
 				setIsShowSidebar={setIsShowSidebar}
 				setIsShowCreate={setIsShowCreate}
+				value={value}
+				setValue={setValue}
 			/>
 
 			<div className="flex w-full">
@@ -19,7 +24,11 @@ function Home() {
 					isShowSidebar={isShowSidebar}
 					setIsShowCreate={setIsShowCreate}
 					isShowCreate={isShowCreate}
+					value={value}
+					setValue={setValue}
 				/>
+
+				<CalendarHome value={value} setValue={setValue} />
 			</div>
 		</div>
 	);

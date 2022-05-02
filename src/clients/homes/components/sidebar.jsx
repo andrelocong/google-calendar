@@ -1,4 +1,4 @@
-import Calendar from "./calendar";
+import CalendarSidebar from "./calendar/calendar.sidebar";
 
 function Sidebar(props) {
 	return (
@@ -43,8 +43,8 @@ function Sidebar(props) {
 			<div
 				className={`h-[95vh w-[250px] border-l-[1px] ${
 					props.isShowSidebar
-						? "translate-x-0 duration-300 ease-in-out"
-						: "translate-x-[-300px] duration-300 ease-in-out"
+						? "realtive translate-x-0 duration-300 ease-in-out"
+						: "absolute translate-x-[-300px] duration-300 ease-in-out"
 				}`}
 			>
 				<div className="sidebar__button-create relative mb-2">
@@ -63,7 +63,7 @@ function Sidebar(props) {
 				</div>
 
 				<div className="sidebar__calendar p-3">
-					<Calendar />
+					<CalendarSidebar value={props.value} setValue={props.setValue} />
 				</div>
 			</div>
 		</>

@@ -1,6 +1,12 @@
 import profile from "../../../img/photo-1622548331053-105252394.jpeg";
+import { useCalendarHook } from "./calendar/calendar.hook";
 
 function Navbar(props) {
+	const { handleNext, handlePrev, monthName, year } = useCalendarHook(
+		props.value,
+		props.setValue
+	);
+
 	return (
 		<nav className="h-[4rem] w-full border-b-[1px] border-slate-200">
 			<div className="flex h-full items-center justify-between p-2">
@@ -24,17 +30,29 @@ function Navbar(props) {
 								Today
 							</div>
 
-							<div className="mr-1 flex h-[30px] w-[30px] cursor-pointer items-center justify-center rounded-full hover:bg-slate-200">
+							<div
+								className="mr-1 flex h-[30px] w-[30px] cursor-pointer items-center justify-center rounded-full hover:bg-slate-200"
+								onClick={() => {
+									handlePrev();
+								}}
+							>
 								<i className="fa-solid fa-angle-left text-slate-500" />
 							</div>
 
-							<div className="flex h-[30px] w-[30px] cursor-pointer items-center justify-center rounded-full hover:bg-slate-200">
+							<div
+								className="flex h-[30px] w-[30px] cursor-pointer items-center justify-center rounded-full hover:bg-slate-200"
+								onClick={() => {
+									handleNext();
+								}}
+							>
 								<i className="fa-solid fa-angle-right text-slate-500" />
 							</div>
 						</div>
 
 						<div className="flex h-full items-center">
-							<h1 className="text-2xl text-slate-700">May 1, 2022</h1>
+							<h1 className="text-2xl text-slate-700">
+								{monthName} {year}
+							</h1>
 						</div>
 					</div>
 
