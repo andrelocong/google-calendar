@@ -40,14 +40,27 @@ function CalendarHome(props) {
 											idx < 7 ? "border-t-0" : ""
 										}`}
 										key={idx}
+										onClick={() => {
+											props.setValue(day);
+										}}
 									>
-										<div className="flex w-full justify-center">
+										<div className="w-full">
+											<div className="mb-1 flex w-full justify-center">
+												<div
+													className={`h-[30px] w-[30px] cursor-pointer rounded-full pt-2 text-center text-xs ${dayStylesHome(
+														day
+													)}`}
+												>
+													{day.format("D").toString()}
+												</div>
+											</div>
+
 											<div
-												className={`h-[30px] w-[30px] cursor-pointer rounded-full pt-2 text-center text-xs ${dayStylesHome(
-													day
-												)}`}
+												className={`w-[90%] rounded-md bg-sky-500 py-1 pl-2 text-xs text-white ${
+													props.value.isShow ? "visible" : "invisible"
+												}`}
 											>
-												{day.format("D").toString()}
+												event
 											</div>
 										</div>
 									</div>

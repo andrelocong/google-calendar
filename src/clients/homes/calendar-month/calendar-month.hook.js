@@ -1,10 +1,10 @@
+// import { useState } from "react";
+
 export const useCalendarMonthHook = (value, setValue) => {
 	const startDay = value.clone().startOf("month").startOf("week");
 	const endDay = value.clone().endOf("month").endOf("week");
-
 	const day = startDay.clone().subtract(1, "day");
 	const date = [];
-
 	const dayName = value._locale._weekdaysShort;
 
 	while (day.isBefore(endDay, "day")) {
