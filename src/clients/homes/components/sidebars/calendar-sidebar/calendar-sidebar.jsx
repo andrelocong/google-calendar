@@ -1,8 +1,18 @@
 import { useState, useEffect } from "react";
+import { useDispatch } from "react-redux";
+import { setMomentValue } from "../../../../../stores/reducers/moment.reducer";
 import { useCalendarSidebarHook } from "./calendar-sidebar.hook";
 
 function CalendarSidebar(props) {
+	//props from sidebar.jsx & create-modal.jsx
+	const value = props.sidebarValue;
+	const setValue = props.setSidebarValue;
+	const setMainValue = props.setMainValue;
+	const setIsShowCalendar = props.setIsShowCalendar;
+
 	const [calendar, setCalendar] = useState([]);
+
+	const dispatch = useDispatch();
 
 	const {
 		date,
@@ -12,12 +22,12 @@ function CalendarSidebar(props) {
 		handleNext,
 		handlePrev,
 		dayStylesSidebar,
-	} = useCalendarSidebarHook(props.value, props.setValue);
+	} = useCalendarSidebarHook(value, setValue);
 
 	useEffect(() => {
 		setCalendar(date);
 		// eslint-disable-next-line
-	}, [props.value]);
+	}, [value]);
 
 	return (
 		<div className="mr-2 w-[230px]">
@@ -68,7 +78,10 @@ function CalendarSidebar(props) {
 										className="day relative m-0 box-border inline-block h-[32px] w-[32px] p-0 text-center text-[11px] leading-[10px]"
 										key={idx}
 										onClick={() => {
-											props.setValue(day);
+											setMainValue(day);
+											setValue(day);
+											dispatch(setMomentValue(day));
+											setIsShowCalendar(false);
 										}}
 									>
 										<div

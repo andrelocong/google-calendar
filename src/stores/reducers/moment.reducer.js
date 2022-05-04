@@ -1,9 +1,10 @@
+import moment from "moment";
 import { createSlice } from "@reduxjs/toolkit";
 
 export const momentSlice = createSlice({
 	name: "moment",
 	initialState: {
-		momentValue: null,
+		momentValue: moment(),
 	},
 	reducers: {
 		setMomentValue: (state, action) => {

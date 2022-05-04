@@ -26,8 +26,9 @@ function Home() {
 					isShowSidebar={isShowSidebar}
 					setIsShowCreate={setIsShowCreate}
 					isShowCreate={isShowCreate}
-					value={sidebarValue}
-					setValue={setSidebarValue}
+					sidebarValue={sidebarValue}
+					setSidebarValue={setSidebarValue}
+					setMainValue={setValue}
 				/>
 
 				<CalendarHome value={value} setValue={setValue} />
