@@ -31,7 +31,12 @@ function Home() {
 					setMainValue={setValue}
 				/>
 
-				<CalendarHome value={value} setValue={setValue} />
+				<CalendarHome
+					value={value}
+					setValue={setValue}
+					setSidebarValue={setSidebarValue}
+					sidebarValue={sidebarValue}
+				/>
 			</div>
 		</div>
 	);

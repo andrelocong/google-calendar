@@ -16,14 +16,20 @@ function CreateModalTask(props) {
 	const setTitle = props.setTitle;
 	const description = props.description;
 	const setDescription = props.setDescription;
+	const showEvent = props.showEvent;
 
 	const dayName = value.format("dddd");
 	const monthName = value.format("MMMM");
 	const day = value.format("D");
 
+	const handleSave = () => {
+		console.log("masuk");
+		showEvent(value);
+	};
+
 	return (
 		<>
-			<div
+			<form
 				className={`fixed top-0 right-0 bottom-0 left-0 z-[999] ${
 					isShowCreateModalTask ? "visible" : "invisible"
 				}`}
@@ -97,12 +103,16 @@ function CreateModalTask(props) {
 					</div>
 
 					<div className="create-modal__footer flex h-[60px] w-full items-center justify-end">
-						<div className="hover: mr-4 cursor-pointer rounded-md bg-blue-500 py-2 px-6 text-sm text-sky-100 hover:opacity-90">
+						<div
+							className="hover: mr-4 cursor-pointer rounded-md bg-blue-500 py-2 px-6 text-sm text-sky-100 hover:opacity-90"
+							type="submit"
+							onClick={() => handleSave()}
+						>
 							Save
 						</div>
 					</div>
 				</div>
-			</div>
+			</form>
 
 			<div
 				className={`fixed top-0 right-0 left-0 bottom-0 z-[9999] ${

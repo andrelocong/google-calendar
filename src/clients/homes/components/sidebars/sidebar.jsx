@@ -11,6 +11,7 @@ function Sidebar(props) {
 	const isShowCreate = props.isShowCreate;
 	const setIsShowCreate = props.setIsShowCreate;
 	const setMainValue = props.setMainValue;
+	const showEvent = props.showEvent;
 
 	const [isShowCreateModalEvent, setIsShowCreateModalEvent] = useState(false);
 	const [isShowCreateModalTask, setIsShowCreateModalTask] = useState(false);
@@ -32,6 +33,7 @@ function Sidebar(props) {
 				title={title}
 				setTitle={setTitle}
 				setDescription={setDescription}
+				showEvent={showEvent}
 			/>
 
 			<CreateModalTask
@@ -47,6 +49,7 @@ function Sidebar(props) {
 				setTitle={setTitle}
 				setDescription={setDescription}
 				description={description}
+				showEvent={showEvent}
 			/>
 			<div
 				className={`sidebar relative z-50 ${

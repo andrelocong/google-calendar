@@ -5,6 +5,10 @@ function Navbar(props) {
 	const { handleNext, handlePrev, handleToday, monthName, year } =
 		useNavbarHook(props.value, props.setValue, props.setSidebarValue);
 
+	const handleClick = () => {
+		console.log("masuk");
+	};
+
 	return (
 		<nav className="h-[4rem] w-full border-b-[1px] border-slate-200">
 			<div className="flex h-full items-center justify-between p-2">
@@ -74,7 +78,10 @@ function Navbar(props) {
 							</div>
 						</div>
 
-						<div className="flex h-[40px] w-[68px] cursor-pointer items-center justify-center rounded-md border-[1px] text-sm hover:bg-slate-200">
+						<div
+							className="flex h-[40px] w-[68px] cursor-pointer items-center justify-center rounded-md border-[1px] text-sm hover:bg-slate-200"
+							onClick={() => handleClick()}
+						>
 							Day
 						</div>
 					</div>

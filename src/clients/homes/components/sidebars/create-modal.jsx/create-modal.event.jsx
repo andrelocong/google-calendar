@@ -1,6 +1,8 @@
 import CalendarSidebar from "../calendar-sidebar/calendar-sidebar";
 import NavigateButton from "./components/navigate.button";
 import CloseButton from "./components/close.button";
+import { useDispatch } from "react-redux";
+import { addEvent } from "../../../../../stores/reducers/event.reducer";
 
 function CreateModalEvent(props) {
 	//props from sidebar.jsx
@@ -14,15 +16,29 @@ function CreateModalEvent(props) {
 	const setMainValue = props.setMainValue;
 	const title = props.title;
 	const setTitle = props.setTitle;
-	// const setDescription = props.setDescription;
+	const showEvent = props.showEvent;
 
 	const dayName = value.format("dddd");
 	const monthName = value.format("MMMM");
 	const day = value.format("D");
 
+	const dispatch = useDispatch();
+
+	const handleSave = () => {
+		dispatch(
+			addEvent({
+				title,
+				value,
+			})
+		);
+
+		setIsShowCreateModalEvent(false);
+		showEvent(value);
+	};
+
 	return (
 		<>
-			<div
+			<form
 				className={`fixed top-0 right-0 bottom-0 left-0 z-[999] ${
 					isShowCreateModalEvent ? "visible" : "invisible"
 				}`}
@@ -81,12 +97,16 @@ function CreateModalEvent(props) {
 					</div>
 
 					<div className="create-modal__footer flex h-[60px] w-full items-center justify-end">
-						<div className="hover: mr-4 cursor-pointer rounded-md bg-blue-500 py-2 px-6 text-sm text-sky-100 hover:opacity-90">
+						<div
+							className="hover: mr-4 cursor-pointer rounded-md bg-blue-500 py-2 px-6 text-sm text-sky-100 hover:opacity-90"
+							type="submit"
+							onClick={() => handleSave()}
+						>
 							Save
 						</div>
 					</div>
 				</div>
-			</div>
+			</form>
 
 			<div
 				className={`fixed top-0 right-0 left-0 bottom-0 z-[9999] ${

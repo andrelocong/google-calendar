@@ -1,13 +1,68 @@
+import moment from "moment";
 import { useEffect, useState } from "react";
 import { useCalendarMonthHook } from "./calendar-month.hook";
+import { store } from "../../../stores";
+import DetailEvent from "./detail-event";
+import CreateModalEvent from "../components/sidebars/create-modal.jsx/create-modal.event";
+import CreateModalTask from "../components/sidebars/create-modal.jsx/create-modal.task";
 
 function CalendarHome(props) {
+	const sidebarValue = props.sidebarValue;
+	const setSidebarValue = props.setSidebarValue;
+	const mainValue = props.value;
+	const setMainValue = props.setValue;
+	const [isShowDetailEvent, setIsShowDetailEvent] = useState(false);
+
+	const events = store.getState().event.events;
+
 	const [calendar, setCalendar] = useState([]);
 
+	const [isShowCreateModalEvent, setIsShowCreateModalEvent] = useState(false);
+	const [isShowCreateModalTask, setIsShowCreateModalTask] = useState(false);
+	const [isShowCalendar, setIsShowCalendar] = useState(false);
+	const [title, setTitle] = useState("");
+	const [description, setDescription] = useState("");
+
 	const { date, dayStylesHome, dayName } = useCalendarMonthHook(
-		props.value,
-		props.setValue
+		mainValue,
+		setMainValue
 	);
+
+	const [eventValue, setEventValue] = useState({
+		title: "",
+		value: "",
+	});
+
+	const handleShowDetailEvent = (evn) => {
+		setEventValue({
+			title: evn.title,
+			value: evn.value,
+		});
+	};
+
+	const showEvent = (day) => {
+		const newEvent = events.map((evn, ind) => {
+			if (moment(evn.value).format("LL") === day.format("LL")) {
+				return (
+					<div
+						className="relative flex h-[20px] w-[90%] cursor-pointer items-center rounded-md hover:bg-slate-200"
+						key={ind}
+						onClick={() => {
+							handleShowDetailEvent(evn);
+							setIsShowDetailEvent(true);
+						}}
+					>
+						<div className="ml-2 h-[10px] w-[10px] rounded-full bg-sky-700"></div>
+						<div className="px-2 text-xs">{evn.title}</div>
+					</div>
+				);
+			} else {
+				return <div className="" key={ind}></div>;
+			}
+		});
+
+		return newEvent;
+	};
 
 	useEffect(() => {
 		setCalendar(date);
@@ -15,7 +70,45 @@ function CalendarHome(props) {
 	}, [props.value]);
 
 	return (
-		<div className="calendar-home w-full">
+		<div className="calendar-home relative w-full">
+			<DetailEvent
+				isShowDetailEvent={isShowDetailEvent}
+				setIsShowDetailEvent={setIsShowDetailEvent}
+				eventValue={eventValue}
+				showEvent={showEvent}
+			/>
+
+			<CreateModalEvent
+				isShowCreateModalEvent={isShowCreateModalEvent}
+				setIsShowCreateModalEvent={setIsShowCreateModalEvent}
+				setIsShowCreateModalTask={setIsShowCreateModalTask}
+				isShowCalendar={isShowCalendar}
+				setIsShowCalendar={setIsShowCalendar}
+				value={sidebarValue}
+				setValue={setSidebarValue}
+				setMainValue={setMainValue}
+				title={title}
+				setTitle={setTitle}
+				setDescription={setDescription}
+				showEvent={showEvent}
+			/>
+
+			<CreateModalTask
+				isShowCreateModalTask={isShowCreateModalTask}
+				setIsShowCreateModalTask={setIsShowCreateModalTask}
+				setIsShowCreateModalEvent={setIsShowCreateModalEvent}
+				isShowCalendar={isShowCalendar}
+				setIsShowCalendar={setIsShowCalendar}
+				value={sidebarValue}
+				setValue={setSidebarValue}
+				setMainValue={setMainValue}
+				title={title}
+				setTitle={setTitle}
+				setDescription={setDescription}
+				description={description}
+				showEvent={showEvent}
+			/>
+
 			<div className="calendar-home__head flex w-full">
 				{dayName.map((name, index) => {
 					return (
@@ -28,7 +121,6 @@ function CalendarHome(props) {
 					);
 				})}
 			</div>
-
 			<div className="calendar-home__body w-full">
 				{calendar.map((week, index) => {
 					return (
@@ -41,7 +133,9 @@ function CalendarHome(props) {
 										}`}
 										key={idx}
 										onClick={() => {
-											props.setValue(day);
+											setMainValue(day);
+											setSidebarValue(day);
+											setIsShowCreateModalEvent(true);
 										}}
 									>
 										<div className="w-full">
@@ -54,13 +148,10 @@ function CalendarHome(props) {
 													{day.format("D").toString()}
 												</div>
 											</div>
-
-											<div
-												className={`w-[90%] rounded-md bg-sky-500 py-1 pl-2 text-xs text-white ${
-													props.value.isShow ? "visible" : "invisible"
-												}`}
-											>
-												event
+											<div className="absolute h-full w-full">
+												<div onClick={(e) => e.stopPropagation()}>
+													{showEvent(day)}
+												</div>
 											</div>
 										</div>
 									</div>
