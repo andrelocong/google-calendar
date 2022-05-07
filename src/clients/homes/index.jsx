@@ -9,6 +9,7 @@ function Home() {
 	const [sidebarValue, setSidebarValue] = useState(moment());
 	const [isShowSidebar, setIsShowSidebar] = useState(true);
 	const [isShowCreate, setIsShowCreate] = useState(false);
+	const [time, setTime] = useState(moment());
 
 	return (
 		<div className="h-[100vh] w-full">
@@ -29,6 +30,8 @@ function Home() {
 					sidebarValue={sidebarValue}
 					setSidebarValue={setSidebarValue}
 					setMainValue={setValue}
+					time={time}
+					setTime={setTime}
 				/>
 
 				<CalendarHome
@@ -36,6 +39,8 @@ function Home() {
 					setValue={setValue}
 					setSidebarValue={setSidebarValue}
 					sidebarValue={sidebarValue}
+					time={time}
+					setTime={setTime}
 				/>
 			</div>
 		</div>

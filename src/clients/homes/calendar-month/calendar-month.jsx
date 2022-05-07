@@ -1,7 +1,6 @@
-import moment from "moment";
 import { useEffect, useState } from "react";
 import { useCalendarMonthHook } from "./calendar-month.hook";
-import { store } from "../../../stores";
+import { useShowEvents } from "./show-event.hook";
 import DetailEvent from "./detail-event";
 import CreateModalEvent from "../components/sidebars/create-modal.jsx/create-modal.event";
 import CreateModalTask from "../components/sidebars/create-modal.jsx/create-modal.task";
@@ -11,9 +10,9 @@ function CalendarHome(props) {
 	const setSidebarValue = props.setSidebarValue;
 	const mainValue = props.value;
 	const setMainValue = props.setValue;
+	const time = props.time;
+	const setTime = props.setTime;
 	const [isShowDetailEvent, setIsShowDetailEvent] = useState(false);
-
-	const events = store.getState().event.events;
 
 	const [calendar, setCalendar] = useState([]);
 
@@ -28,41 +27,7 @@ function CalendarHome(props) {
 		setMainValue
 	);
 
-	const [eventValue, setEventValue] = useState({
-		title: "",
-		value: "",
-	});
-
-	const handleShowDetailEvent = (evn) => {
-		setEventValue({
-			title: evn.title,
-			value: evn.value,
-		});
-	};
-
-	const showEvent = (day) => {
-		const newEvent = events.map((evn, ind) => {
-			if (moment(evn.value).format("LL") === day.format("LL")) {
-				return (
-					<div
-						className="relative flex h-[20px] w-[90%] cursor-pointer items-center rounded-md hover:bg-slate-200"
-						key={ind}
-						onClick={() => {
-							handleShowDetailEvent(evn);
-							setIsShowDetailEvent(true);
-						}}
-					>
-						<div className="ml-2 h-[10px] w-[10px] rounded-full bg-sky-700"></div>
-						<div className="px-2 text-xs">{evn.title}</div>
-					</div>
-				);
-			} else {
-				return <div className="" key={ind}></div>;
-			}
-		});
-
-		return newEvent;
-	};
+	const { showEvent, eventValue } = useShowEvents(setIsShowDetailEvent);
 
 	useEffect(() => {
 		setCalendar(date);
@@ -91,6 +56,8 @@ function CalendarHome(props) {
 				setTitle={setTitle}
 				setDescription={setDescription}
 				showEvent={showEvent}
+				time={time}
+				setTime={setTime}
 			/>
 
 			<CreateModalTask
@@ -107,6 +74,8 @@ function CalendarHome(props) {
 				setDescription={setDescription}
 				description={description}
 				showEvent={showEvent}
+				time={time}
+				setTime={setTime}
 			/>
 
 			<div className="calendar-home__head flex w-full">

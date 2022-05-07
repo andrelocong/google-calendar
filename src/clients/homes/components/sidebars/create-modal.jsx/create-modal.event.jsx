@@ -1,8 +1,10 @@
 import CalendarSidebar from "../calendar-sidebar/calendar-sidebar";
 import NavigateButton from "./components/navigate.button";
 import CloseButton from "./components/close.button";
+import InputTimes from "./components/input-times";
 import { useDispatch } from "react-redux";
 import { addEvent } from "../../../../../stores/reducers/event.reducer";
+import { useState } from "react";
 
 function CreateModalEvent(props) {
 	//props from sidebar.jsx
@@ -16,7 +18,12 @@ function CreateModalEvent(props) {
 	const setMainValue = props.setMainValue;
 	const title = props.title;
 	const setTitle = props.setTitle;
+	const setDescription = props.setDescription;
 	const showEvent = props.showEvent;
+	const time = props.time;
+	const setTime = props.setTime;
+
+	const [isShowInputTime, setIsShowInputTime] = useState(false);
 
 	const dayName = value.format("dddd");
 	const monthName = value.format("MMMM");
@@ -25,15 +32,33 @@ function CreateModalEvent(props) {
 	const dispatch = useDispatch();
 
 	const handleSave = () => {
-		dispatch(
-			addEvent({
-				title,
-				value,
-			})
-		);
+		const newDate = value.format("YYYY-MM-DD") + "T00:00:00.000Z";
+		if (isShowInputTime === false) {
+			dispatch(
+				addEvent({
+					title,
+					newDate,
+					timeStatus: 0,
+				})
+			);
+		} else if (isShowInputTime === true) {
+			const date = value.format("YYYY-MM-DD");
+			const newDate = date + "T" + time + ".000Z";
+			dispatch(
+				addEvent({
+					title,
+					newDate,
+					timeStatus: 1,
+				})
+			);
+		}
 
 		setIsShowCreateModalEvent(false);
 		showEvent(value);
+		setIsShowInputTime(false);
+		setTimeout(() => {
+			setTitle("");
+		});
 	};
 
 	return (
@@ -44,6 +69,9 @@ function CreateModalEvent(props) {
 				}`}
 				onClick={() => {
 					setIsShowCreateModalEvent(false);
+					setIsShowInputTime(false);
+					setTitle("");
+					setDescription("");
 				}}
 			>
 				<div
@@ -54,6 +82,8 @@ function CreateModalEvent(props) {
 						<CloseButton
 							setIsShowCreateModalEvent={setIsShowCreateModalEvent}
 							setIsShowCreateModalTask={setIsShowCreateModalTask}
+							setTitle={setTitle}
+							setDescription={setDescription}
 						/>
 					</div>
 
@@ -80,9 +110,9 @@ function CreateModalEvent(props) {
 									<i className="fa-regular fa-clock" />
 								</div>
 
-								<div className="flex h-full w-[92%] cursor-pointer items-center justify-start rounded-md hover:bg-slate-100">
+								<div className="flex h-full w-[80%] cursor-pointer items-center justify-start rounded-md hover:bg-slate-100">
 									<div
-										className="ml-2 cursor-pointer border-slate-600 text-sm text-slate-600 hover:border-b-[1px]"
+										className="ml-2 cursor-pointer border-slate-600 pb-[2px] text-sm text-slate-600 hover:border-b-[1px]"
 										onClick={() => {
 											setIsShowCalendar(true);
 										}}
@@ -90,6 +120,27 @@ function CreateModalEvent(props) {
 										<span>
 											{dayName}, {monthName} {day}
 										</span>
+									</div>
+
+									<InputTimes
+										time={time}
+										setTime={setTime}
+										isShowInputTime={isShowInputTime}
+									/>
+								</div>
+
+								<div className="flex w-[22%] items-center justify-end">
+									<div
+										className="cursor-pointer rounded-md border border-slate-200 py-[6px] px-3 text-xs text-slate-500 hover:bg-slate-100"
+										onClick={() => {
+											setIsShowInputTime(!isShowInputTime);
+										}}
+									>
+										{isShowInputTime ? (
+											<span>Just date</span>
+										) : (
+											<span>Add time</span>
+										)}
 									</div>
 								</div>
 							</div>

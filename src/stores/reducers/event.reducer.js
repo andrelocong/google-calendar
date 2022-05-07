@@ -14,7 +14,7 @@ export const eventSlice = createSlice({
 			// 	(item) => !item.value.includes(action.payload)
 			// );
 			state.events = state.events.filter(
-				({ value }) => value !== action.payload
+				({ newDate }) => newDate !== action.payload
 			);
 		},
 	},

@@ -15,6 +15,16 @@ function DetailEvent(props) {
 	};
 
 	const date = moment(eventValue.value).format("LL");
+	const time = moment(eventValue.value).format("LT");
+
+	const showTime = () => {
+		if (eventValue.timeStatus === 0) {
+			return null;
+		} else if (eventValue.timeStatus === 1) {
+			return time;
+		}
+	};
+
 	return (
 		<div
 			className={`absolute top-0 right-0 bottom-0 left-0 z-[99999] ${
@@ -56,7 +66,12 @@ function DetailEvent(props) {
 
 						<div className="w-[80%]">
 							<h2 className="text-xl text-slate-700">{eventValue.title}</h2>
-							<p className="text-sm tracking-wide text-slate-700">{date}</p>
+							<div className="flex">
+								<p className="text-sm tracking-wide text-slate-700">{date}</p>
+								<p className="ml-3 text-sm tracking-wide text-slate-700">
+									{showTime()}
+								</p>
+							</div>
 						</div>
 					</div>
 				</div>

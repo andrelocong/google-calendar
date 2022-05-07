@@ -35,6 +35,8 @@ function CreateModalTask(props) {
 				}`}
 				onClick={() => {
 					setIsShowCreateModalTask(false);
+					setDescription("");
+					setTitle("");
 				}}
 			>
 				<div
@@ -45,6 +47,8 @@ function CreateModalTask(props) {
 						<CloseButton
 							setIsShowCreateModalEvent={setIsShowCreateModalEvent}
 							setIsShowCreateModalTask={setIsShowCreateModalTask}
+							setDescription={setDescription}
+							setTitle={setTitle}
 						/>
 					</div>
 
