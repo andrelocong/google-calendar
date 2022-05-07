@@ -72,36 +72,6 @@ function Sidebar(props) {
 				>
 					<i className="fa-solid fa-plus text-3xl" />
 				</div>
-
-				<div
-					className={`absolute top-16 z-[999] ml-[15px] mt-[10px] h-auto w-[150px] rounded-lg border-[1px] border-slate-200 bg-white shadow-lg shadow-slate-400 ${
-						isShowCreate
-							? "visible translate-x-0 translate-y-0 duration-300 ease-in-out"
-							: "duration-0 invisible translate-x-[-5px] translate-y-[-50px] ease-in-out"
-					}`}
-				>
-					<div className="py-2">
-						<div
-							className="flex h-[30px] w-full cursor-pointer items-center hover:bg-slate-200"
-							onClick={() => {
-								setIsShowCreateModalEvent(true);
-								setIsShowCreate(false);
-							}}
-						>
-							<span className="pl-4 text-sm">Event</span>
-						</div>
-
-						<div
-							className="flex h-[30px] w-full cursor-pointer items-center hover:bg-slate-200"
-							onClick={() => {
-								setIsShowCreateModalTask(true);
-								setIsShowCreate(false);
-							}}
-						>
-							<span className="pl-4 text-sm">Task</span>
-						</div>
-					</div>
-				</div>
 			</div>
 
 			<div
@@ -111,7 +81,7 @@ function Sidebar(props) {
 						: "absolute translate-x-[-300px] duration-300 ease-in-out"
 				}`}
 			>
-				<div className="sidebar__button-create relative mb-2">
+				<div className="sidebar__button-create relative z-50 mb-2">
 					<div
 						className={`mt-5 ml-2 flex h-[50px] w-[150px] cursor-pointer items-center justify-center rounded-full border-[1px] border-slate-200 shadow-md hover:shadow-lg hover:shadow-slate-400 ${
 							isShowCreate ? "bg-slate-300" : "bg-white"
@@ -134,6 +104,42 @@ function Sidebar(props) {
 						isShowCalendar={isShowCalendar}
 						setMainValue={setMainValue}
 					/>
+				</div>
+			</div>
+
+			<div
+				className={`absolute top-0 right-0 bottom-0 left-0 ${
+					isShowCreate
+						? "visible z-[49] translate-x-0 translate-y-0 duration-300 ease-in-out"
+						: "duration-0 invisible z-[51] translate-x-[-5px] translate-y-[-50px] ease-in-out"
+				}`}
+				onClick={() => setIsShowCreate(false)}
+			>
+				<div
+					className={`absolute top-32 ml-[20px] mt-[10px] h-auto w-[150px] rounded-lg border-[1px] border-slate-200 bg-white shadow-lg shadow-slate-400`}
+					onClick={(e) => e.stopPropagation()}
+				>
+					<div className="py-2">
+						<div
+							className="flex h-[30px] w-full cursor-pointer items-center hover:bg-slate-200"
+							onClick={() => {
+								setIsShowCreateModalEvent(true);
+								setIsShowCreate(false);
+							}}
+						>
+							<span className="pl-4 text-sm">Event</span>
+						</div>
+
+						<div
+							className="flex h-[30px] w-full cursor-pointer items-center hover:bg-slate-200"
+							onClick={() => {
+								setIsShowCreateModalTask(true);
+								setIsShowCreate(false);
+							}}
+						>
+							<span className="pl-4 text-sm">Task</span>
+						</div>
+					</div>
 				</div>
 			</div>
 		</>
