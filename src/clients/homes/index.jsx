@@ -9,6 +9,7 @@ function Home() {
 	const [sidebarValue, setSidebarValue] = useState(moment());
 	const [isShowSidebar, setIsShowSidebar] = useState(true);
 	const [isShowCreate, setIsShowCreate] = useState(false);
+	const [isShowInputTime, setIsShowInputTime] = useState(false);
 	const [time, setTime] = useState(moment());
 
 	return (
@@ -32,6 +33,8 @@ function Home() {
 					setMainValue={setValue}
 					time={time}
 					setTime={setTime}
+					isShowInputTime={isShowInputTime}
+					setIsShowInputTime={setIsShowInputTime}
 				/>
 
 				<CalendarHome
@@ -41,6 +44,8 @@ function Home() {
 					sidebarValue={sidebarValue}
 					time={time}
 					setTime={setTime}
+					isShowInputTime={isShowInputTime}
+					setIsShowInputTime={setIsShowInputTime}
 				/>
 			</div>
 		</div>

@@ -3,12 +3,14 @@ function CloseButton(props) {
 	const setIsShowCreateModalTask = props.setIsShowCreateModalTask;
 	const setDescription = props.setDescription;
 	const setTitle = props.setTitle;
+	const setIsShowInputTime = props.setIsShowInputTime;
 	return (
 		<div
 			className="mr-2 flex h-[30px] w-[30px] cursor-pointer items-center justify-center rounded-full hover:bg-slate-200"
 			onClick={() => {
 				setIsShowCreateModalEvent(false);
 				setIsShowCreateModalTask(false);
+				setIsShowInputTime(false);
 				setTitle("");
 				setDescription("");
 			}}

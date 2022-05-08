@@ -12,10 +12,11 @@ function CalendarHome(props) {
 	const setMainValue = props.setValue;
 	const time = props.time;
 	const setTime = props.setTime;
-	const [isShowDetailEvent, setIsShowDetailEvent] = useState(false);
+	const isShowInputTime = props.isShowInputTime;
+	const setIsShowInputTime = props.setIsShowInputTime;
 
 	const [calendar, setCalendar] = useState([]);
-
+	const [isShowDetailEvent, setIsShowDetailEvent] = useState(false);
 	const [isShowCreateModalEvent, setIsShowCreateModalEvent] = useState(false);
 	const [isShowCreateModalTask, setIsShowCreateModalTask] = useState(false);
 	const [isShowCalendar, setIsShowCalendar] = useState(false);
@@ -58,6 +59,8 @@ function CalendarHome(props) {
 				showEvent={showEvent}
 				time={time}
 				setTime={setTime}
+				isShowInputTime={isShowInputTime}
+				setIsShowInputTime={setIsShowInputTime}
 			/>
 
 			<CreateModalTask
@@ -76,6 +79,8 @@ function CalendarHome(props) {
 				showEvent={showEvent}
 				time={time}
 				setTime={setTime}
+				isShowInputTime={isShowInputTime}
+				setIsShowInputTime={setIsShowInputTime}
 			/>
 
 			<div className="calendar-home__head flex w-full">

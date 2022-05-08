@@ -2,9 +2,9 @@ import CalendarSidebar from "../calendar-sidebar/calendar-sidebar";
 import NavigateButton from "./components/navigate.button";
 import CloseButton from "./components/close.button";
 import InputTimes from "./components/input-times";
+import TimeButton from "./components/time.button";
 import { useDispatch } from "react-redux";
 import { addEvent } from "../../../../../stores/reducers/event.reducer";
-import { useState } from "react";
 
 function CreateModalEvent(props) {
 	//props from sidebar.jsx
@@ -22,8 +22,8 @@ function CreateModalEvent(props) {
 	const showEvent = props.showEvent;
 	const time = props.time;
 	const setTime = props.setTime;
-
-	const [isShowInputTime, setIsShowInputTime] = useState(false);
+	const isShowInputTime = props.isShowInputTime;
+	const setIsShowInputTime = props.setIsShowInputTime;
 
 	const dayName = value.format("dddd");
 	const monthName = value.format("MMMM");
@@ -37,8 +37,10 @@ function CreateModalEvent(props) {
 			dispatch(
 				addEvent({
 					title,
+					description: "",
 					newDate,
 					timeStatus: 0,
+					status: "event",
 				})
 			);
 		} else if (isShowInputTime === true) {
@@ -47,8 +49,10 @@ function CreateModalEvent(props) {
 			dispatch(
 				addEvent({
 					title,
+					description: "",
 					newDate,
 					timeStatus: 1,
+					status: "event",
 				})
 			);
 		}
@@ -82,8 +86,9 @@ function CreateModalEvent(props) {
 						<CloseButton
 							setIsShowCreateModalEvent={setIsShowCreateModalEvent}
 							setIsShowCreateModalTask={setIsShowCreateModalTask}
-							setTitle={setTitle}
+							setIsShowInputTime={setIsShowInputTime}
 							setDescription={setDescription}
+							setTitle={setTitle}
 						/>
 					</div>
 
@@ -129,20 +134,10 @@ function CreateModalEvent(props) {
 									/>
 								</div>
 
-								<div className="flex w-[22%] items-center justify-end">
-									<div
-										className="cursor-pointer rounded-md border border-slate-200 py-[6px] px-3 text-xs text-slate-500 hover:bg-slate-100"
-										onClick={() => {
-											setIsShowInputTime(!isShowInputTime);
-										}}
-									>
-										{isShowInputTime ? (
-											<span>Just date</span>
-										) : (
-											<span>Add time</span>
-										)}
-									</div>
-								</div>
+								<TimeButton
+									setIsShowInputTime={setIsShowInputTime}
+									isShowInputTime={isShowInputTime}
+								/>
 							</div>
 						</div>
 					</div>

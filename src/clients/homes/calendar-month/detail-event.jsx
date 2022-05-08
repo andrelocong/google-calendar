@@ -25,6 +25,24 @@ function DetailEvent(props) {
 		}
 	};
 
+	const showDescription = () => {
+		if (eventValue.status === "task") {
+			return (
+				<div className={`flex w-full`}>
+					<div className="flex w-[20%] items-center justify-center">
+						<i className="fa-solid fa-align-left text-slate-700" />
+					</div>
+
+					<div className="w-[75%] text-sm text-slate-700">
+						{eventValue.description}
+					</div>
+				</div>
+			);
+		} else {
+			return null;
+		}
+	};
+
 	return (
 		<div
 			className={`absolute top-0 right-0 bottom-0 left-0 z-[99999] ${
@@ -59,9 +77,13 @@ function DetailEvent(props) {
 				</div>
 
 				<div className="detail-event__body w-full py-5">
-					<div className="flex w-full">
+					<div className="mb-5 flex w-full">
 						<div className="flex w-[20%] items-center justify-center">
-							<div className="h-[15px] w-[15px] rounded-md bg-sky-700"></div>
+							<div
+								className={`h-[15px] w-[15px] rounded-md ${
+									eventValue.status === "task" ? "bg-indigo-500" : "bg-sky-500"
+								}`}
+							></div>
 						</div>
 
 						<div className="w-[80%]">
@@ -74,6 +96,8 @@ function DetailEvent(props) {
 							</div>
 						</div>
 					</div>
+
+					{showDescription()}
 				</div>
 			</div>
 		</div>

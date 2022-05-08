@@ -7,14 +7,19 @@ export const useShowEvents = (setIsShowDetailEvent) => {
 
 	const [eventValue, setEventValue] = useState({
 		title: "",
+		description: "",
 		value: "",
+		timeStatus: 0,
+		status: "",
 	});
 
 	const handleShowDetailEvent = (evn) => {
 		setEventValue({
 			title: evn.title,
+			description: evn.description,
 			value: evn.newDate,
 			timeStatus: evn.timeStatus,
+			status: evn.status,
 		});
 	};
 
@@ -33,7 +38,11 @@ export const useShowEvents = (setIsShowDetailEvent) => {
 							setIsShowDetailEvent(true);
 						}}
 					>
-						<div className="ml-2 h-[10px] w-[10px] rounded-full bg-sky-700"></div>
+						<div
+							className={`ml-2 h-[10px] w-[10px] rounded-full ${
+								evn.status === "task" ? "bg-indigo-500" : "bg-sky-500"
+							}`}
+						></div>
 						<div
 							className={`ml-1 w-[60px] text-xs text-slate-800 ${
 								evn.timeStatus === 1 ? "visible relative" : "invisible absolute"

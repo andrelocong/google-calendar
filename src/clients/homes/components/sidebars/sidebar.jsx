@@ -14,6 +14,8 @@ function Sidebar(props) {
 	const showEvent = props.showEvent;
 	const time = props.time;
 	const setTime = props.setTime;
+	const isShowInputTime = props.isShowInputTime;
+	const setIsShowInputTime = props.setIsShowInputTime;
 
 	const [isShowCreateModalEvent, setIsShowCreateModalEvent] = useState(false);
 	const [isShowCreateModalTask, setIsShowCreateModalTask] = useState(false);
@@ -38,6 +40,8 @@ function Sidebar(props) {
 				showEvent={showEvent}
 				time={time}
 				setTime={setTime}
+				isShowInputTime={isShowInputTime}
+				setIsShowInputTime={setIsShowInputTime}
 			/>
 
 			<CreateModalTask
@@ -56,6 +60,8 @@ function Sidebar(props) {
 				showEvent={showEvent}
 				time={time}
 				setTime={setTime}
+				isShowInputTime={isShowInputTime}
+				setIsShowInputTime={setIsShowInputTime}
 			/>
 			<div
 				className={`sidebar relative z-50 ${
