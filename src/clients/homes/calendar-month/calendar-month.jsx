@@ -23,7 +23,7 @@ function CalendarHome(props) {
 	const [title, setTitle] = useState("");
 	const [description, setDescription] = useState("");
 
-	const { date, dayStylesHome, dayName } = useCalendarMonthHook(
+	const { date, dayStylesHome, dayName, showBigEvent } = useCalendarMonthHook(
 		mainValue,
 		setMainValue
 	);
@@ -126,6 +126,7 @@ function CalendarHome(props) {
 												<div onClick={(e) => e.stopPropagation()}>
 													{showEvent(day)}
 												</div>
+												{showBigEvent(day)}
 											</div>
 										</div>
 									</div>

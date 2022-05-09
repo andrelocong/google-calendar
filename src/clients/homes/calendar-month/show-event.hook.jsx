@@ -31,7 +31,7 @@ export const useShowEvents = (setIsShowDetailEvent) => {
 				const time = moment(evn.newDate).format("LT");
 				return (
 					<div
-						className="relative flex h-[20px] w-[95%] cursor-pointer items-center overflow-hidden rounded-md hover:bg-slate-200"
+						className="relative mb-1 flex h-[20px] w-[95%] cursor-pointer items-center overflow-hidden rounded-md hover:bg-slate-200"
 						key={ind}
 						onClick={() => {
 							handleShowDetailEvent(evn);
