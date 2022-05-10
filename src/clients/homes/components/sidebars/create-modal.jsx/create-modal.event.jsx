@@ -6,33 +6,31 @@ import TimeButton from "./components/time.button";
 import { useDispatch } from "react-redux";
 import { addEvent } from "../../../../../stores/reducers/event.reducer";
 
-function CreateModalEvent(props) {
-	//props from sidebar.jsx
-	const isShowCreateModalEvent = props.isShowCreateModalEvent;
-	const setIsShowCreateModalEvent = props.setIsShowCreateModalEvent;
-	const setIsShowCreateModalTask = props.setIsShowCreateModalTask;
-	const setIsShowCalendar = props.setIsShowCalendar;
-	const isShowCalendar = props.isShowCalendar;
-	const value = props.value;
-	const setValue = props.setValue;
-	const setMainValue = props.setMainValue;
-	const title = props.title;
-	const setTitle = props.setTitle;
-	const setDescription = props.setDescription;
-	const showEvent = props.showEvent;
-	const time = props.time;
-	const setTime = props.setTime;
-	const isShowInputTime = props.isShowInputTime;
-	const setIsShowInputTime = props.setIsShowInputTime;
-
-	const dayName = value.format("dddd");
-	const monthName = value.format("MMMM");
-	const day = value.format("D");
+function CreateModalEvent({
+	isShowCreateModalEvent,
+	setIsShowCreateModalEvent,
+	setIsShowCreateModalTask,
+	isShowCalendar,
+	setIsShowCalendar,
+	sidebarDate,
+	setSidebarDate,
+	title,
+	setTitle,
+	setDescription,
+	mainTime,
+	setMainTime,
+	isShowInputTime,
+	setIsShowInputTime,
+	setMainDate,
+}) {
+	const dayName = sidebarDate.format("dddd");
+	const monthName = sidebarDate.format("MMMM");
+	const day = sidebarDate.format("D");
 
 	const dispatch = useDispatch();
 
 	const handleSave = () => {
-		const newDate = value.format("YYYY-MM-DD") + "T00:00:00.000Z";
+		const newDate = sidebarDate.format("YYYY-MM-DD") + "T00:00:00.000Z";
 		if (isShowInputTime === false) {
 			dispatch(
 				addEvent({
@@ -44,8 +42,8 @@ function CreateModalEvent(props) {
 				})
 			);
 		} else if (isShowInputTime === true) {
-			const date = value.format("YYYY-MM-DD");
-			const newDate = date + "T" + time + ".000Z";
+			const date = sidebarDate.format("YYYY-MM-DD");
+			const newDate = date + "T" + mainTime + ".000Z";
 			dispatch(
 				addEvent({
 					title,
@@ -58,7 +56,6 @@ function CreateModalEvent(props) {
 		}
 
 		setIsShowCreateModalEvent(false);
-		showEvent(value);
 		setIsShowInputTime(false);
 		setTimeout(() => {
 			setTitle("");
@@ -128,8 +125,8 @@ function CreateModalEvent(props) {
 									</div>
 
 									<InputTimes
-										time={time}
-										setTime={setTime}
+										mainTime={mainTime}
+										setMainTime={setMainTime}
 										isShowInputTime={isShowInputTime}
 									/>
 								</div>
@@ -167,9 +164,9 @@ function CreateModalEvent(props) {
 					onClick={(e) => e.stopPropagation()}
 				>
 					<CalendarSidebar
-						sidebarValue={value}
-						setSidebarValue={setValue}
-						setMainValue={setMainValue}
+						sidebarDate={sidebarDate}
+						setSidebarDate={setSidebarDate}
+						setMainDate={setMainDate}
 						setIsShowCalendar={setIsShowCalendar}
 					/>
 				</div>

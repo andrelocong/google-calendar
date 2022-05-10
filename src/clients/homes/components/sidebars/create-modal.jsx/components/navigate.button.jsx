@@ -1,10 +1,9 @@
-function NavigateButton(props) {
-	//props from create-modal.event & create-modal.task
-	const isShowCreateModalTask = props.isShowCreateModalTask;
-	const setIsShowCreateModalTask = props.setIsShowCreateModalTask;
-	const isShowCreateModalEvent = props.isShowCreateModalEvent;
-	const setIsShowCreateModalEvent = props.setIsShowCreateModalEvent;
-
+function NavigateButton({
+	isShowCreateModalEvent,
+	setIsShowCreateModalEvent,
+	isShowCreateModalTask,
+	setIsShowCreateModalTask,
+}) {
 	return (
 		<div className="mb-5 flex w-full justify-end">
 			<div className="flex w-[92%] justify-start">

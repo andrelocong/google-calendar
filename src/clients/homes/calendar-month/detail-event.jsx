@@ -2,11 +2,7 @@ import moment from "moment";
 import { useDispatch } from "react-redux";
 import { deleteEvent } from "../../../stores/reducers/event.reducer";
 
-function DetailEvent(props) {
-	const isShowDetailEvent = props.isShowDetailEvent;
-	const setIsShowDetailEvent = props.setIsShowDetailEvent;
-	const eventValue = props.eventValue;
-
+function DetailEvent({ isShowDetailEvent, setIsShowDetailEvent, eventValue }) {
 	const dispatch = useDispatch();
 
 	const deleteDataEvent = () => {

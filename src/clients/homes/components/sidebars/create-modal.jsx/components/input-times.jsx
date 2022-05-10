@@ -1,10 +1,6 @@
 import moment from "moment";
 
-function InputTimes(props) {
-	const time = props.time;
-	const setTime = props.setTime;
-	const isShowInputTime = props.isShowInputTime;
-
+function InputTimes({ mainTime, setMainTime, isShowInputTime }) {
 	const startTime = moment().clone().startOf("day");
 	const endTime = moment().clone().endOf("day");
 	const hours = [];
@@ -19,8 +15,8 @@ function InputTimes(props) {
 			<div className="ml-3 border-slate-600 hover:border-b-[1px]">
 				<select
 					className="cursor-pointer border-0 bg-transparent text-sm text-slate-600 outline-none"
-					value={time}
-					onChange={(e) => setTime(e.target.value)}
+					value={mainTime}
+					onChange={(e) => setMainTime(e.target.value)}
 				>
 					{hours.map((hour, index) => {
 						return (

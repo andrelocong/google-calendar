@@ -1,7 +1,4 @@
-function TimeButton(props) {
-	const setIsShowInputTime = props.setIsShowInputTime;
-	const isShowInputTime = props.isShowInputTime;
-
+function TimeButton({ setIsShowInputTime, isShowInputTime }) {
 	return (
 		<div className="flex w-[22%] items-center justify-end">
 			<div

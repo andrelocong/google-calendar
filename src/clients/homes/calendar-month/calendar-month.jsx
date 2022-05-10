@@ -1,20 +1,24 @@
 import { useEffect, useState } from "react";
 import { useCalendarMonthHook } from "./calendar-month.hook";
-import { useShowEvents } from "./show-event.hook";
 import DetailEvent from "./detail-event";
 import CreateModalEvent from "../components/sidebars/create-modal.jsx/create-modal.event";
 import CreateModalTask from "../components/sidebars/create-modal.jsx/create-modal.task";
+import { bigEvent } from "./big-event.data";
+import BigEvent from "./big-event.component";
+import ShowEvent from "./show-event.component";
+import moment from "moment";
+// import PropTypes from "prop-types";
 
-function CalendarHome(props) {
-	const sidebarValue = props.sidebarValue;
-	const setSidebarValue = props.setSidebarValue;
-	const mainValue = props.value;
-	const setMainValue = props.setValue;
-	const time = props.time;
-	const setTime = props.setTime;
-	const isShowInputTime = props.isShowInputTime;
-	const setIsShowInputTime = props.setIsShowInputTime;
-
+const CalendarMonth = ({
+	sidebarDate,
+	setSidebarDate,
+	mainDate,
+	setMainDate,
+	mainTime,
+	setMainTime,
+	isShowInputTime,
+	setIsShowInputTime,
+}) => {
 	const [calendar, setCalendar] = useState([]);
 	const [isShowDetailEvent, setIsShowDetailEvent] = useState(false);
 	const [isShowCreateModalEvent, setIsShowCreateModalEvent] = useState(false);
@@ -23,17 +27,20 @@ function CalendarHome(props) {
 	const [title, setTitle] = useState("");
 	const [description, setDescription] = useState("");
 
-	const { date, dayStylesHome, dayName, showBigEvent } = useCalendarMonthHook(
-		mainValue,
-		setMainValue
-	);
-
-	const { showEvent, eventValue } = useShowEvents(setIsShowDetailEvent);
+	const {
+		date,
+		dayStylesHome,
+		dayName,
+		isBigEvent,
+		eventList,
+		eventValue,
+		handleShowDetailEvent,
+	} = useCalendarMonthHook(mainDate);
 
 	useEffect(() => {
 		setCalendar(date);
 		// eslint-disable-next-line
-	}, [props.value]);
+	}, [mainDate]);
 
 	return (
 		<div className="calendar-home relative w-full">
@@ -41,7 +48,6 @@ function CalendarHome(props) {
 				isShowDetailEvent={isShowDetailEvent}
 				setIsShowDetailEvent={setIsShowDetailEvent}
 				eventValue={eventValue}
-				showEvent={showEvent}
 			/>
 
 			<CreateModalEvent
@@ -50,15 +56,14 @@ function CalendarHome(props) {
 				setIsShowCreateModalTask={setIsShowCreateModalTask}
 				isShowCalendar={isShowCalendar}
 				setIsShowCalendar={setIsShowCalendar}
-				value={sidebarValue}
-				setValue={setSidebarValue}
-				setMainValue={setMainValue}
+				sidebarDate={sidebarDate}
+				setSidebarDate={setSidebarDate}
+				setMainDate={setMainDate}
 				title={title}
 				setTitle={setTitle}
 				setDescription={setDescription}
-				showEvent={showEvent}
-				time={time}
-				setTime={setTime}
+				mainTime={mainTime}
+				setMainTime={setMainTime}
 				isShowInputTime={isShowInputTime}
 				setIsShowInputTime={setIsShowInputTime}
 			/>
@@ -69,16 +74,15 @@ function CalendarHome(props) {
 				setIsShowCreateModalEvent={setIsShowCreateModalEvent}
 				isShowCalendar={isShowCalendar}
 				setIsShowCalendar={setIsShowCalendar}
-				value={sidebarValue}
-				setValue={setSidebarValue}
-				setMainValue={setMainValue}
+				sidebarDate={sidebarDate}
+				setSidebarDate={setSidebarDate}
+				setMainDate={setMainDate}
 				title={title}
 				setTitle={setTitle}
 				setDescription={setDescription}
 				description={description}
-				showEvent={showEvent}
-				time={time}
-				setTime={setTime}
+				mainTime={mainTime}
+				setMainTime={setMainTime}
 				isShowInputTime={isShowInputTime}
 				setIsShowInputTime={setIsShowInputTime}
 			/>
@@ -107,8 +111,8 @@ function CalendarHome(props) {
 										}`}
 										key={idx}
 										onClick={() => {
-											setMainValue(day);
-											setSidebarValue(day);
+											setMainDate(day);
+											setSidebarDate(day);
 											setIsShowCreateModalEvent(true);
 										}}
 									>
@@ -124,9 +128,37 @@ function CalendarHome(props) {
 											</div>
 											<div className="absolute h-full w-full">
 												<div onClick={(e) => e.stopPropagation()}>
-													{showEvent(day)}
+													{eventList.map((event, _index) => {
+														if (
+															moment(event.newDate).format("YYYY-MM-DD") ===
+															day.format("YYYY-MM-DD")
+														) {
+															const time = moment(event.newDate).format("LT");
+															return (
+																<ShowEvent
+																	key={_index}
+																	time={time}
+																	event={event}
+																	eventStatus={event.status}
+																	eventTimeStatus={event.timeStatue}
+																	eventTitle={event.title}
+																	setIsShowDetailEvent={setIsShowDetailEvent}
+																	handleShowDetailEvent={handleShowDetailEvent}
+																/>
+															);
+														}
+														return null;
+													})}
 												</div>
-												{showBigEvent(day)}
+
+												{bigEvent.map((event, _index) => {
+													if (isBigEvent(event, day)) {
+														return (
+															<BigEvent key={_index} eventName={event.name} />
+														);
+													}
+													return null;
+												})}
 											</div>
 										</div>
 									</div>
@@ -138,6 +170,8 @@ function CalendarHome(props) {
 			</div>
 		</div>
 	);
-}
+};
 
-export default CalendarHome;
+// CalendarMonth = {};
+
+export default CalendarMonth;

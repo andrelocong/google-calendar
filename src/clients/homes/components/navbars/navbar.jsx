@@ -1,9 +1,16 @@
 import profile from "../../../../img/photo-1622548331053-105252394.jpeg";
 import { useNavbarHook } from "./navbar.hook";
 
-function Navbar(props) {
+function Navbar({
+	isShowSidebar,
+	setIsShowSidebar,
+	setIsShowCreate,
+	mainDate,
+	setMainDate,
+	setSidebarDate,
+}) {
 	const { handleNext, handlePrev, handleToday, monthName, year } =
-		useNavbarHook(props.value, props.setValue, props.setSidebarValue);
+		useNavbarHook(mainDate, setMainDate, setSidebarDate);
 
 	const handleClick = () => {
 		console.log("masuk");
@@ -16,8 +23,8 @@ function Navbar(props) {
 					<div
 						className="mr-2 flex h-[48px] w-[48px] cursor-pointer items-center justify-center rounded-full hover:bg-slate-200"
 						onClick={() => {
-							props.setIsShowSidebar(!props.isShowSidebar);
-							props.setIsShowCreate(false);
+							setIsShowSidebar(!isShowSidebar);
+							setIsShowCreate(false);
 						}}
 					>
 						<i className="fa-solid fa-bars text-slate-500" />

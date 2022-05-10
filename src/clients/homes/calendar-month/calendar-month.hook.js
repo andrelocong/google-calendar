@@ -1,13 +1,21 @@
-// import { useState } from "react";
-
+import { useState } from "react";
 import moment from "moment";
+import { store } from "../../../stores";
 
-export const useCalendarMonthHook = (value, setValue) => {
-	const startDay = value.clone().startOf("month").startOf("week");
-	const endDay = value.clone().endOf("month").endOf("week");
+export const useCalendarMonthHook = (mainDate) => {
+	const startDay = mainDate.clone().startOf("month").startOf("week");
+	const endDay = mainDate.clone().endOf("month").endOf("week");
 	const day = startDay.clone().subtract(1, "day");
 	const date = [];
-	const dayName = value._locale._weekdaysShort;
+	const dayName = mainDate._locale._weekdaysShort;
+	const eventList = store.getState().event.events;
+	const [eventValue, setEventValue] = useState({
+		title: "",
+		description: "",
+		value: "",
+		timeStatus: 0,
+		status: "",
+	});
 
 	while (day.isBefore(endDay, "day")) {
 		date.push(
@@ -20,62 +28,37 @@ export const useCalendarMonthHook = (value, setValue) => {
 	const dayStylesHome = (day) => {
 		return day.isSame(new Date(), "day")
 			? "bg-sky-600 text-white"
-			: "hover:bg-slate-200" && day.isBefore(value, "month")
+			: "hover:bg-slate-200" && day.isBefore(mainDate, "month")
 			? "text-slate-300 hover:bg-slate-200"
-			: "text-black hover:bg-slate-200" && day.isAfter(value, "month")
+			: "text-black hover:bg-slate-200" && day.isAfter(mainDate, "month")
 			? "text-slate-300 hover:bg-slate-200"
 			: "text-black hover:bg-slate-200";
 	};
 
-	const bigEvent = [
-		{
-			date: "2022-05-01T00:00:00.000Z",
-			name: "Hari Buruh Internasional",
-		},
-		{
-			date: "2022-05-02T00:00:00.000Z",
-			name: "Hari Idul Fitri",
-		},
-		{
-			date: "2022-05-03T00:00:00.000Z",
-			name: "Hari Idul Fitri",
-		},
-		{
-			date: "2022-05-16T00:00:00.000Z",
-			name: "Hari Raya Waisak",
-		},
-		{
-			date: "2022-05-26T00:00:00.000Z",
-			name: "Kenaikan Isa Al Masih",
-		},
-		{
-			date: "2022-06-01T00:00:00.000Z",
-			name: "Hari Lahir Pancasila",
-		},
-	];
-
-	const showBigEvent = (day) => {
-		const newEvent = bigEvent.map((events, index) => {
-			if (
-				moment(events.date).format("YYYY-MM-DD") === day.format("YYYY-MM-DD")
-			) {
-				return (
-					<div
-						className="relative flex h-[20px] w-[95%] items-center overflow-hidden rounded-md bg-green-600"
-						key={index}
-					>
-						<div className="w-[300px] pl-2 text-xs text-white">
-							{events.name}
-						</div>
-					</div>
-				);
-			} else {
-				return null;
-			}
-		});
-
-		return newEvent;
+	const isBigEvent = (event, day) => {
+		if (moment(event.date).format("YYYY-MM-DD") === day.format("YYYY-MM-DD")) {
+			return true;
+		}
+		return false;
 	};
 
-	return { date, dayName, dayStylesHome, showBigEvent };
+	const handleShowDetailEvent = (event) => {
+		setEventValue({
+			title: event.title,
+			description: event.description,
+			value: event.newDate,
+			timeStatus: event.timeStatus,
+			status: event.status,
+		});
+	};
+
+	return {
+		date,
+		dayName,
+		dayStylesHome,
+		isBigEvent,
+		eventList,
+		eventValue,
+		handleShowDetailEvent,
+	};
 };

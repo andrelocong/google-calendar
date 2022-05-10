@@ -3,20 +3,18 @@ import CalendarSidebar from "./calendar-sidebar/calendar-sidebar";
 import CreateModalEvent from "./create-modal.jsx/create-modal.event";
 import CreateModalTask from "./create-modal.jsx/create-modal.task";
 
-function Sidebar(props) {
-	//props from homes/index.jsx
-	const sidebarValue = props.sidebarValue;
-	const setSidebarValue = props.setSidebarValue;
-	const isShowSidebar = props.isShowSidebar;
-	const isShowCreate = props.isShowCreate;
-	const setIsShowCreate = props.setIsShowCreate;
-	const setMainValue = props.setMainValue;
-	const showEvent = props.showEvent;
-	const time = props.time;
-	const setTime = props.setTime;
-	const isShowInputTime = props.isShowInputTime;
-	const setIsShowInputTime = props.setIsShowInputTime;
-
+function Sidebar({
+	isShowSidebar,
+	setIsShowCreate,
+	isShowCreate,
+	sidebarDate,
+	setSidebarDate,
+	setMainDate,
+	mainTime,
+	setMainTime,
+	isShowInputTime,
+	setIsShowInputTime,
+}) {
 	const [isShowCreateModalEvent, setIsShowCreateModalEvent] = useState(false);
 	const [isShowCreateModalTask, setIsShowCreateModalTask] = useState(false);
 	const [isShowCalendar, setIsShowCalendar] = useState(false);
@@ -31,15 +29,14 @@ function Sidebar(props) {
 				setIsShowCreateModalTask={setIsShowCreateModalTask}
 				isShowCalendar={isShowCalendar}
 				setIsShowCalendar={setIsShowCalendar}
-				value={sidebarValue}
-				setValue={setSidebarValue}
-				setMainValue={setMainValue}
+				sidebarDate={sidebarDate}
+				setSidebarDate={setSidebarDate}
+				setMainDate={setMainDate}
 				title={title}
 				setTitle={setTitle}
 				setDescription={setDescription}
-				showEvent={showEvent}
-				time={time}
-				setTime={setTime}
+				mainTime={mainTime}
+				setMainTime={setMainTime}
 				isShowInputTime={isShowInputTime}
 				setIsShowInputTime={setIsShowInputTime}
 			/>
@@ -50,16 +47,15 @@ function Sidebar(props) {
 				setIsShowCreateModalEvent={setIsShowCreateModalEvent}
 				isShowCalendar={isShowCalendar}
 				setIsShowCalendar={setIsShowCalendar}
-				value={sidebarValue}
-				setValue={setSidebarValue}
-				setMainValue={setMainValue}
+				sidebarDate={sidebarDate}
+				setSidebarDate={setSidebarDate}
+				setMainDate={setMainDate}
 				title={title}
 				setTitle={setTitle}
 				setDescription={setDescription}
 				description={description}
-				showEvent={showEvent}
-				time={time}
-				setTime={setTime}
+				mainTime={mainTime}
+				setMainTime={setMainTime}
 				isShowInputTime={isShowInputTime}
 				setIsShowInputTime={setIsShowInputTime}
 			/>
@@ -104,11 +100,11 @@ function Sidebar(props) {
 
 				<div className="sidebar__calendar p-3">
 					<CalendarSidebar
-						sidebarValue={sidebarValue}
-						setSidebarValue={setSidebarValue}
+						sidebarDate={sidebarDate}
+						setSidebarDate={setSidebarDate}
 						setIsShowCalendar={setIsShowCalendar}
 						isShowCalendar={isShowCalendar}
-						setMainValue={setMainValue}
+						setMainDate={setMainDate}
 					/>
 				</div>
 			</div>
