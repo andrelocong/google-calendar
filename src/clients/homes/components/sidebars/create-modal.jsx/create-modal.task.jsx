@@ -35,6 +35,7 @@ function CreateModalTask({
 		if (isShowInputTime === false) {
 			dispatch(
 				addEvent({
+					id: Math.random() * 36,
 					title,
 					description,
 					newDate,
@@ -48,6 +49,7 @@ function CreateModalTask({
 
 			dispatch(
 				addEvent({
+					id: Math.random() * 36,
 					title,
 					description,
 					newDate,
@@ -137,6 +139,7 @@ function CreateModalTask({
 								<TimeButton
 									setIsShowInputTime={setIsShowInputTime}
 									isShowInputTime={isShowInputTime}
+									setMainTime={setMainTime}
 								/>
 							</div>
 

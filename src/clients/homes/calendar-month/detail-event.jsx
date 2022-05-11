@@ -6,7 +6,7 @@ function DetailEvent({ isShowDetailEvent, setIsShowDetailEvent, eventValue }) {
 	const dispatch = useDispatch();
 
 	const deleteDataEvent = () => {
-		dispatch(deleteEvent(eventValue.value));
+		dispatch(deleteEvent(eventValue.id));
 		setIsShowDetailEvent(false);
 	};
 

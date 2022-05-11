@@ -18,6 +18,9 @@ function InputTimes({ mainTime, setMainTime, isShowInputTime }) {
 					value={mainTime}
 					onChange={(e) => setMainTime(e.target.value)}
 				>
+					<option value="" hidden>
+						00:00
+					</option>
 					{hours.map((hour, index) => {
 						return (
 							<option value={hour.format("hh:mm:ss")} key={index}>

@@ -9,7 +9,7 @@ import ShowEvent from "./show-event.component";
 import moment from "moment";
 // import PropTypes from "prop-types";
 
-const CalendarMonth = ({
+function CalendarMonth({
 	sidebarDate,
 	setSidebarDate,
 	mainDate,
@@ -18,7 +18,7 @@ const CalendarMonth = ({
 	setMainTime,
 	isShowInputTime,
 	setIsShowInputTime,
-}) => {
+}) {
 	const [calendar, setCalendar] = useState([]);
 	const [isShowDetailEvent, setIsShowDetailEvent] = useState(false);
 	const [isShowCreateModalEvent, setIsShowCreateModalEvent] = useState(false);
@@ -140,7 +140,7 @@ const CalendarMonth = ({
 																	time={time}
 																	event={event}
 																	eventStatus={event.status}
-																	eventTimeStatus={event.timeStatue}
+																	eventTimeStatus={event.timeStatus}
 																	eventTitle={event.title}
 																	setIsShowDetailEvent={setIsShowDetailEvent}
 																	handleShowDetailEvent={handleShowDetailEvent}
@@ -170,8 +170,17 @@ const CalendarMonth = ({
 			</div>
 		</div>
 	);
-};
+}
 
-// CalendarMonth = {};
+// CalendarMonth.propTypes = {
+// 	mainDate: PropTypes.object,
+// 	setMainDate: PropTypes.object,
+// 	setSidebarDate: PropTypes.object,
+// 	sidebarDate: PropTypes.object,
+// 	mainTime: PropTypes.object,
+// 	setMainTime: PropTypes.object,
+// 	isShowInputTime: PropTypes.bool,
+// 	setIsShowInputTime: PropTypes.bool,
+// };
 
 export default CalendarMonth;

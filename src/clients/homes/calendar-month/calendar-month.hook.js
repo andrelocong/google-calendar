@@ -10,6 +10,7 @@ export const useCalendarMonthHook = (mainDate) => {
 	const dayName = mainDate._locale._weekdaysShort;
 	const eventList = store.getState().event.events;
 	const [eventValue, setEventValue] = useState({
+		id: "",
 		title: "",
 		description: "",
 		value: "",
@@ -44,6 +45,7 @@ export const useCalendarMonthHook = (mainDate) => {
 
 	const handleShowDetailEvent = (event) => {
 		setEventValue({
+			id: event.id,
 			title: event.title,
 			description: event.description,
 			value: event.newDate,

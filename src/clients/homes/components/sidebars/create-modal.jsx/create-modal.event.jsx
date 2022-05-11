@@ -34,6 +34,7 @@ function CreateModalEvent({
 		if (isShowInputTime === false) {
 			dispatch(
 				addEvent({
+					id: Math.random() * 45,
 					title,
 					description: "",
 					newDate,
@@ -46,6 +47,7 @@ function CreateModalEvent({
 			const newDate = date + "T" + mainTime + ".000Z";
 			dispatch(
 				addEvent({
+					id: Math.random() * 45,
 					title,
 					description: "",
 					newDate,
@@ -134,6 +136,7 @@ function CreateModalEvent({
 								<TimeButton
 									setIsShowInputTime={setIsShowInputTime}
 									isShowInputTime={isShowInputTime}
+									setMainTime={setMainTime}
 								/>
 							</div>
 						</div>

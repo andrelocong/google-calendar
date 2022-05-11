@@ -10,12 +10,7 @@ export const eventSlice = createSlice({
 			state.events = [...state.events, action.payload];
 		},
 		deleteEvent: (state, action) => {
-			// state.events = state.events.filter(
-			// 	(item) => !item.value.includes(action.payload)
-			// );
-			state.events = state.events.filter(
-				({ newDate }) => newDate !== action.payload
-			);
+			state.events = state.events.filter(({ id }) => id !== action.payload);
 		},
 	},
 });
