@@ -172,15 +172,4 @@ function CalendarMonth({
 	);
 }
 
-// CalendarMonth.propTypes = {
-// 	mainDate: PropTypes.object,
-// 	setMainDate: PropTypes.object,
-// 	setSidebarDate: PropTypes.object,
-// 	sidebarDate: PropTypes.object,
-// 	mainTime: PropTypes.object,
-// 	setMainTime: PropTypes.object,
-// 	isShowInputTime: PropTypes.bool,
-// 	setIsShowInputTime: PropTypes.bool,
-// };
-
 export default CalendarMonth;
